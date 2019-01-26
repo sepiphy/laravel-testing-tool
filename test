@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+echo 'Testing Laravel Framework v5.8'
+echo
+
+echo '>>> Framework cloning...'
+git clone git@github.com:laravel/framework.git
+cd framework
+echo
+
+echo '>>> Composer installing...'
+docker run -it --rm \
+    -v "$PWD":/usr/src/myapp \
+    -w /usr/src/myapp \
+    -u $(id -u ${USER}):$(id -g ${USER}) \
+    sepiphy:laravel5.8-testing \
+    composer install -n --prefer-dist
+echo
+
+echo '>>> PHPUnit testing...'
+for COMPONENT in Auth Broadcasting Bus Cache Config Console Container Cookie
+do
+    echo ">>>>>> $COMPONENT testing..."
+    docker run -it --rm \
+        -v "$PWD":/usr/src/myapp \
+        -w /usr/src/myapp \
+        -u $(id -u ${USER}):$(id -g ${USER}) \
+        sepiphy:laravel5.8-testing \
+        php vendor/bin/phpunit tests/$COMPONENT
+    echo
+done
+
+echo '>>> Framework removing...'
+cd .. && rm -rf framework
+echo
