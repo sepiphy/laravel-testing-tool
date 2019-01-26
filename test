@@ -1,35 +1,30 @@
 #!/usr/bin/env bash
 
-echo 'Testing Laravel Framework v5.8'
-echo
+LARAVEL_PHP_VERSION="$1_testing"
+DOCKER_IMAGE="$LARAVEL_PHP_VERSION"
+
+echo "Testing Laravel Framework [$LARAVEL_PHP_VERSION]"
+echo # Add an empty line.
 
 echo '>>> Framework cloning...'
-git clone git@github.com:laravel/framework.git
-cd framework
-echo
-
-echo '>>> Composer installing...'
-docker run -it --rm \
-    -v "$PWD":/usr/src/myapp \
-    -w /usr/src/myapp \
-    -u $(id -u ${USER}):$(id -g ${USER}) \
-    sepiphy:laravel5.8-testing \
-    composer install -n --prefer-dist
-echo
+if [ ! -d "$PWD/framework" ]; then
+    git clone git@github.com:laravel/framework.git
+fi
+echo # Add an empty line.
 
 echo '>>> PHPUnit testing...'
-for COMPONENT in Auth Broadcasting Bus Cache Config Console Container Cookie
-do
-    echo ">>>>>> $COMPONENT testing..."
-    docker run -it --rm \
-        -v "$PWD":/usr/src/myapp \
-        -w /usr/src/myapp \
-        -u $(id -u ${USER}):$(id -g ${USER}) \
-        sepiphy:laravel5.8-testing \
-        php vendor/bin/phpunit tests/$COMPONENT
-    echo
-done
+docker run -it --rm \
+    -v "$PWD/framework":/usr/src/framework \
+    -v "$PWD/runtest":/usr/src/framework/runtest \
+    -v "$PWD/phpunit.xml":/usr/src/framework/phpunit.xml \
+    -w /usr/src/framework \
+    -u $(id -u ${USER}):$(id -g ${USER}) \
+    --rm \
+    --network laravel_testing_network \
+    "sepiphy/$LARAVEL_PHP_VERSION" \
+    /bin/bash runtest
+echo # Add an empty line.
 
 echo '>>> Framework removing...'
-cd .. && rm -rf framework
-echo
+rm -rf framework
+echo # Add an empty line.

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+    backupGlobals="false"
+    backupStaticAttributes="false"
+    beStrictAboutTestsThatDoNotTestAnything="false"
+    bootstrap="tests/bootstrap.php"
+    colors="true"
+    convertErrorsToExceptions="true"
+    convertNoticesToExceptions="true"
+    convertWarningsToExceptions="true"
+    processIsolation="false"
+    stopOnError="false"
+    stopOnFailure="false"
+    verbose="true"
+>
+    <testsuites>
+        <testsuite name="Laravel Test Suite">
+            <directory suffix="Test.php">./tests/Auth</directory>
+            <directory suffix="Test.php">./tests/Broadcasting</directory>
+            <directory suffix="Test.php">./tests/Bus</directory>
+            <!-- Condition: redis is required to use cache. -->
+            <directory suffix="Test.php">./tests/Cache</directory>
+            <directory suffix="Test.php">./tests/Config</directory>
+            <directory suffix="Test.php">./tests/Console</directory>
+            <directory suffix="Test.php">./tests/Container</directory>
+            <directory suffix="Test.php">./tests/Cookie</directory>
+            <!-- <directory suffix="Test.php">./tests/Database</directory> -->
+            <directory suffix="Test.php">./tests/Encryption</directory>
+            <directory suffix="Test.php">./tests/Events</directory>
+            <directory suffix="Test.php">./tests/Filesystem</directory>
+            <directory suffix="Test.php">./tests/Foundation</directory>
+            <!-- Condition: ^7.2 required to use Argon2i. -->
+            <directory suffix="Test.php">./tests/Hashing</directory>
+            <!-- Condition: gd is required to use imagejpeg() function. -->
+            <directory suffix="Test.php">./tests/Http</directory>
+            <!-- Condition: Too complex. Set up later. -->
+            <!-- <directory suffix="Test.php">./tests/Integration</directory> -->
+            <directory suffix="Test.php">./tests/Log</directory>
+            <directory suffix="Test.php">./tests/Mail</directory>
+            <directory suffix="Test.php">./tests/Notifications</directory>
+            <directory suffix="Test.php">./tests/Pagination</directory>
+            <directory suffix="Test.php">./tests/Pipeline</directory>
+            <!-- Condition: redis is required to use queue. -->
+            <directory suffix="Test.php">./tests/Queue</directory>
+            <!-- Condition: redis is required. -->
+            <directory suffix="Test.php">./tests/Redis</directory>
+            <directory suffix="Test.php">./tests/Routing</directory>
+            <directory suffix="Test.php">./tests/Session</directory>
+            <directory suffix="Test.php">./tests/Support</directory>
+            <directory suffix="Test.php">./tests/Translation</directory>
+            <directory suffix="Test.php">./tests/Validation</directory>
+            <directory suffix="Test.php">./tests/View</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./src</directory>
+            <exclude>
+                <directory suffix=".blade.php">./src/</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+    <php>
+      <env name="REDIS_HOST" value="laravel_testing_redis"/>
+      <env name="REDIS_PORT" value="6379"/>
+    </php>
+</phpunit>
