@@ -2,11 +2,8 @@
 
 php --version
 
-# Remove the vendor directory if it exists.
-if [ -d vendor]; then
-    rm -rf vendor
-fi
+rm -rf vendor composer.lock
 
-composer install -n --prefer-dist
+composer install --no-interaction --prefer-dist
 
 php vendor/bin/phpunit
