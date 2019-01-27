@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+php --version
+
+# Remove the vendor directory if it exists.
+if [ -d vendor]; then
+    rm -rf vendor
+fi
+
+composer install -n --prefer-dist
+
+php vendor/bin/phpunit
