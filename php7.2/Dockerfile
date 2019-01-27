@@ -12,7 +12,7 @@ RUN apt-get install -y --no-install-recommends \
     libmemcached-dev \
     libmagickwand-dev
 
-RUN docker-php-ext-install -j$(nproc) bcmath pcntl zip
+RUN docker-php-ext-install -j$(nproc) bcmath pcntl pdo_mysql zip
 
 RUN pecl install memcached redis
 

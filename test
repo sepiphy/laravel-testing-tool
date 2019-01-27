@@ -1,30 +1,39 @@
 #!/usr/bin/env bash
 
-LARAVEL_PHP_VERSION="$1_testing"
-DOCKER_IMAGE="$LARAVEL_PHP_VERSION"
+# LARAVEL_FRAMEWORK_PATH="$HOME/Code/GitHub/laravel/framework"
 
-echo "Testing Laravel Framework [$LARAVEL_PHP_VERSION]"
-echo # Add an empty line.
+LARAVEL_VERSION=$1
 
-echo '>>> Framework cloning...'
-if [ ! -d "$PWD/framework" ]; then
-    git clone git@github.com:laravel/framework.git
+if [ $LARAVEL_VERSION = "5.8" ]; then
+    FRAMEWORK_BRANCH="master"
 fi
-echo # Add an empty line.
 
-echo '>>> PHPUnit testing...'
-docker run -it --rm \
-    -v "$PWD/framework":/usr/src/framework \
-    -v "$PWD/runtest":/usr/src/framework/runtest \
-    -v "$PWD/phpunit.xml":/usr/src/framework/phpunit.xml \
-    -w /usr/src/framework \
-    -u $(id -u ${USER}):$(id -g ${USER}) \
-    --rm \
-    --network laravel_testing_network \
-    "sepiphy/$LARAVEL_PHP_VERSION" \
-    /bin/bash runtest
-echo # Add an empty line.
+for PHP_VERSION in "7.2"
+do
+    # Copy the customized configuration files.
+    cp phpunit.xml $LARAVEL_FRAMEWORK_PATH/
+    cp runtest $LARAVEL_FRAMEWORK_PATH/
 
-echo '>>> Framework removing...'
-rm -rf framework
+    # Checkout to the expected branch.
+    echo ">>> Testing Laravel Framework v$LARAVEL_VERSION with PHP v$PHP_VERSION."
+    cd $LARAVEL_FRAMEWORK_PATH
+    git fetch origin
+    git checkout origin/$FRAMEWORK_BRANCH
+    cd ..
+    echo # Add an empty line.
+
+    # Execute test scripts inside the container.
+    docker run -it --rm \
+        -v "$LARAVEL_FRAMEWORK_PATH":/usr/src/framework \
+        -w /usr/src/framework \
+        -u $(id -u ${USER}):$(id -g ${USER}) \
+        --rm \
+        --network laravel_testing_network \
+        "sepiphy/laravel_testing_php$PHP_VERSION" \
+        /bin/bash runtest
+
+    # Remove the customized configuration files.
+    rm $LARAVEL_FRAMEWORK_PATH/phpunit.xml $LARAVEL_FRAMEWORK_PATH/runtest
+done
+
 echo # Add an empty line.
