@@ -2,8 +2,4 @@
 
 php --version
 
-rm -rf vendor composer.lock
-
-composer install --no-interaction --prefer-dist
-
 php vendor/bin/phpunit
