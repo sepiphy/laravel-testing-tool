@@ -4,10 +4,10 @@ Providing the environment to test Laravel Framework core code.
 
 ## Installation
 
-Build docker images locally.
+Build necessary docker images locally.
 
 ```bash
-docker build ./php7.2 -t sepiphy/laravel_testing_php7.2
+./build # bash build
 ```
 
 Create a new bridge work named "laravel_testing_network".
@@ -39,11 +39,13 @@ docker run -d --name laravel_testing_mysql --network laravel_testing_network -e 
 ## Usage
 
 Export the fully path to the Laravel Framework core code.
+
 ```bash
 export LARAVEL_FRAMEWORK_PATH = "$HOME/Code/GitHub/laravel/framework
 ```
 
-Execute the test script with your expected version.
+Execute the test script. Current supported PHP versions are 7.1, 7.2 and 7.3.
+
 ```bash
-./test 5.8 # Laravel version 5.8
+./test # bash test
 ```
