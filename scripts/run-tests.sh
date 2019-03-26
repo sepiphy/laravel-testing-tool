@@ -6,14 +6,13 @@ rm -rf $LARAVEL_FRAMEWORK_PATH/vendor $LARAVEL_FRAMEWORK_PATH/composer.lock
 docker run -it --rm \
     --user $(id -u):$(id -g) \
     --volume $LARAVEL_FRAMEWORK_PATH:/app \
-    --volume $PWD/storage/composer/tmp:/tmp \
+    --volume $PWD/storage/composer:/tmp \
     --workdir /app \
-    sepiphy/laravel_testing_composer install --no-interaction --prefer-dist
+    sepiphylabs/laravel_testing_composer install --no-interaction --prefer-dist
 echo # Add an empty line.
 
 # Copy the customized configuration files.
 cp phpunit.xml $LARAVEL_FRAMEWORK_PATH/
-cp runtest $LARAVEL_FRAMEWORK_PATH/
 
 for PHP_VERSION in "7.1" "7.2" "7.3"
 do
@@ -27,10 +26,10 @@ do
         -w /usr/src/framework \
         -u $(id -u ${USER}):$(id -g ${USER}) \
         --network laravel_testing_network \
-        "sepiphy/laravel_testing_php$PHP_VERSION" \
-        /bin/bash runtest
+        "sepiphylabs/laravel_testing_php$PHP_VERSION" \
+        /bin/bash -c "php --version && php vendor/bin/phpunit"
     echo # Add an empty line.
 done
 
 # Remove the customized configuration files.
-rm $LARAVEL_FRAMEWORK_PATH/phpunit.xml $LARAVEL_FRAMEWORK_PATH/runtest
+rm $LARAVEL_FRAMEWORK_PATH/phpunit.xml

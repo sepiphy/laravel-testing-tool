@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-php --version
-
-php vendor/bin/phpunit
