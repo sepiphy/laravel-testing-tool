@@ -33,3 +33,15 @@ Execute the `run-tests` script.
 ```bash
 bash scripts/run-tests.sh
 ```
+
+## Contributing
+
+- Thank you for considering contributing to `sepiphylabs/laravel-testing-tool` package!
+
+- Feel free to submit an issue or a pull request for your expectation!
+
+- All contributions are welcome and accepted via pull requests.
+
+## License
+
+- The `sepiphylabs/laravel-testing-tool` package is open-sourced software licensed under the [MIT license](LICENSE.md).
