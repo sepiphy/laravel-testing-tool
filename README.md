@@ -1,6 +1,10 @@
-# About
+## About
 
-Providing the environment to test Laravel Framework core code.
+Provide the environment to test Laravel Framework core code.
+
+## Requirements
+
+- Docker >=18.09.3
 
 ## Installation
 
@@ -12,13 +16,13 @@ bash scripts/build-images.sh
 
 ## Usage
 
-Start some services including MySQL, Memcached and Redis.
+Start various services including MySQL, Memcached and Redis.
 
 ```bash
 bash scripts/start-services.sh
 ```
 
-Export the fully path to the Laravel Framework core code.
+Prepare the fully path to the Laravel Framework core code.
 
 ```bash
 export LARAVEL_FRAMEWORK_PATH="$HOME/Documents/Code/GitHub/laravel/framework
