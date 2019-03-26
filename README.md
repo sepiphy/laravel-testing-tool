@@ -8,6 +8,16 @@ Provide the environment to test Laravel Framework core code.
 
 ## Installation
 
+Clone this repository.
+
+```bash
+cd /path/to/workdir
+
+git clone git@github.com:sepiphylabs/laravel-testing-tool.git
+
+cd laravel-testing-tool
+```
+
 Build necessary docker images locally.
 
 ```bash
