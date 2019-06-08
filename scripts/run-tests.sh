@@ -8,7 +8,7 @@ docker run -it --rm \
     --volume $LARAVEL_FRAMEWORK_PATH:/app \
     --volume $PWD/storage/composer:/tmp \
     --workdir /app \
-    sepiphylabs/laravel_testing_composer install --no-interaction --prefer-dist
+    sericode/laravel_testing_composer install --no-interaction --prefer-dist
 echo # Add an empty line.
 
 # Copy the customized configuration files.
@@ -26,7 +26,7 @@ do
         -w /usr/src/framework \
         -u $(id -u ${USER}):$(id -g ${USER}) \
         --network laravel_testing_network \
-        "sepiphylabs/laravel_testing_php$PHP_VERSION" \
+        "sericode/laravel_testing_php$PHP_VERSION" \
         /bin/bash -c "php --version && php vendor/bin/phpunit"
     echo # Add an empty line.
 done

@@ -1,6 +1,4 @@
-## About
-
-Provide the environment to test Laravel Framework core code.
+The environment to test Laravel Framework core code.
 
 ## Requirements
 
@@ -13,7 +11,7 @@ Clone this repository.
 ```bash
 cd /path/to/workdir
 
-git clone git@github.com:sepiphylabs/laravel-testing-tool.git
+git clone git@github.com:sericode/laravel-testing-tool.git
 
 cd laravel-testing-tool
 ```
@@ -35,7 +33,7 @@ bash scripts/start-services.sh
 Prepare the fully path to the Laravel Framework core code.
 
 ```bash
-export LARAVEL_FRAMEWORK_PATH="$HOME/Documents/Code/GitHub/laravel/framework
+export LARAVEL_FRAMEWORK_PATH="$HOME/Documents/GitHub/laravel/framework
 ```
 
 Execute the `run-tests` script.
@@ -46,12 +44,8 @@ bash scripts/run-tests.sh
 
 ## Contributing
 
-- Thank you for considering contributing to `sepiphylabs/laravel-testing-tool` package!
-
-- Feel free to submit an issue or a pull request for your expectation!
-
-- All contributions are welcome and accepted via pull requests.
+Please read the [contribution guide](https://seriquynh.com/oss/contributing?github=sericode/laravel-testing-tool) for more information.
 
 ## License
 
-- The `sepiphylabs/laravel-testing-tool` package is open-sourced software licensed under the [MIT license](LICENSE.md).
+Please read the [MIT license](LICENSE.md) for more information.
