@@ -1,0 +1,13 @@
+version: "3.3"
+
+services:
+  php7.2:
+    build:
+      context: ./docker/php7.2
+      args:
+        - CODE_GID=${CODE_GID}
+        - CODE_UID=${CODE_UID}
+    volumes:
+      - ${SYMFONY_FRAMEWORK_DIR}:/app
+      - $PWD/phpunit.symfony.xml:/app/phpunit.xml
+    command: php phpunit
