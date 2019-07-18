@@ -1,1 +1,1 @@
-The environment to test Laravel Framework core code.
+The environment to test some PHP Framework core code.

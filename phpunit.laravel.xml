@@ -29,12 +29,12 @@
     <php>
         <ini name="memory_limit" value="-1"/>
         <!-- <env name="DB_CONNECTION" value="mysql"/> -->
-        <!-- <env name="DB_HOST" value="laravel_testing_mysql"/> -->
+        <!-- <env name="DB_HOST" value="mysql"/> -->
         <!-- <env name="DB_USERNAME" value="root"/> -->
         <!-- <env name="DB_PASSWORD" value="wrong-secret-words"/> -->
-        <env name="REDIS_HOST" value="laravel_testing_redis"/>
+        <env name="REDIS_HOST" value="redis"/>
         <env name="REDIS_PORT" value="6379"/>
-        <env name="MEMCACHED_HOST" value="laravel_testing_memcached"/>
+        <env name="MEMCACHED_HOST" value="memcached"/>
         <env name="MEMCACHED_PORT" value="11211"/>
     </php>
 </phpunit>
