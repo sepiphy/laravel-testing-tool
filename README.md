@@ -1,1 +1,1 @@
-The environment to test some PHP Framework core code.
+The environment to test some PHP frameworks core code
