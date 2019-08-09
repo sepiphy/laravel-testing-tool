@@ -15,6 +15,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libjpeg-dev \
     zlib1g-dev \
     && docker-php-ext-configure pdo_odbc --with-pdo-odbc=unixODBC,/usr \
+    && docker-php-ext-configure gd --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) bcmath gd iconv pcntl pdo_mysql pdo_odbc zip \
     && pecl install imagick memcached redis \
     && docker-php-ext-enable imagick memcached redis \
