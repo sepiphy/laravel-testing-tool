@@ -10,4 +10,3 @@ services:
     volumes:
       - ${LARAVEL_FRAMEWORK_DIR}:/app
       - $PWD/phpunit.laravel.xml:/app/phpunit.xml
-    command: php vendor/bin/phpunit

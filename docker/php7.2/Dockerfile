@@ -13,8 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && pecl install memcached redis \
     && docker-php-ext-enable memcached redis \
     && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
-    && php composer-setup.php \
-    && mv composer.phar /usr/bin/composer
+    && php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 
 WORKDIR /app
 
