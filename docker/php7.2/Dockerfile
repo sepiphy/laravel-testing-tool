@@ -4,15 +4,20 @@ RUN apt-get update
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git zip unzip curl \
+    unixodbc \
+    unixodbc-dev \
     libmcrypt-dev \
     libmemcached-dev \
     libmagickwand-dev \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
     libpng-dev \
-    && docker-php-ext-install -j$(nproc) bcmath gd iconv pcntl pdo_mysql zip \
-    && pecl install memcached redis \
-    && docker-php-ext-enable memcached redis \
+    libjpeg-dev \
+    zlib1g-dev \
+    && docker-php-ext-configure pdo_odbc --with-pdo-odbc=unixODBC,/usr \
+    && docker-php-ext-install -j$(nproc) bcmath gd iconv pcntl pdo_mysql pdo_odbc zip \
+    && pecl install imagick memcached redis \
+    && docker-php-ext-enable imagick memcached redis \
     && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 

@@ -5,19 +5,29 @@ networks:
     driver: bridge
 
 services:
-  memcached1.5:
+  memcached:
     image: ltt-memcached1.5:latest
     build:
       context: ./docker/memcached1.5
     networks:
       - lttnet
 
-  redis4.0:
-    image: ltt-redis4.0:latest
+  redis:
+    image: ltt-redis5.0:latest
     build:
-      context: ./docker/redis4.0
+      context: ./docker/redis5.0
     networks:
       - lttnet
+
+  mysql:
+    image: ltt-mysql5.7:latest
+    build:
+      context: ./docker/mysql5.7
+    networks:
+      - lttnet
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    command: --default-authentication-plugin=mysql_native_password
 
   php7.2:
     image: ltt-php7.2:latest
