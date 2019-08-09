@@ -1,7 +1,26 @@
 version: "3.3"
 
+networks:
+  lttnet:
+    driver: bridge
+
 services:
+  memcached1.5:
+    image: ltt-memcached1.5:latest
+    build:
+      context: ./docker/memcached1.5
+    networks:
+      - lttnet
+
+  redis4.0:
+    image: ltt-redis4.0:latest
+    build:
+      context: ./docker/redis4.0
+    networks:
+      - lttnet
+
   php7.2:
+    image: ltt-php7.2:latest
     build:
       context: ./docker/php7.2
       args:
@@ -9,4 +28,7 @@ services:
         - CODE_UID=${CODE_UID}
     volumes:
       - ${LARAVEL_FRAMEWORK_DIR}:/app
-      - $PWD/phpunit.laravel.xml:/app/phpunit.xml
+      - $PWD/phpunit.xml:/app/phpunit.xml
+    command: php -S localhost:8080
+    networks:
+      - lttnet

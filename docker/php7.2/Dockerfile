@@ -3,6 +3,7 @@ FROM php:7.2
 RUN apt-get update
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    git zip unzip curl \
     libmcrypt-dev \
     libmemcached-dev \
     libmagickwand-dev \
