@@ -27,6 +27,7 @@ services:
       - lttnet
     environment:
       MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: laravel
     command: --default-authentication-plugin=mysql_native_password
 
   php7.2:
