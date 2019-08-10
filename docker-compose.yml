@@ -13,9 +13,9 @@ services:
       - lttnet
 
   redis:
-    image: ltt-redis5.0:latest
+    image: ltt-redis4.0:latest
     build:
-      context: ./docker/redis5.0
+      context: ./docker/redis4.0
     networks:
       - lttnet
 
