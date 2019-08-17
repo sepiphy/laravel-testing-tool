@@ -117,6 +117,8 @@
         <env name="DB_DATABASE" value="laravel"/>
         <env name="DB_USERNAME" value="root"/>
         <env name="DB_PASSWORD" value="secret"/>
+        <env name="DYNAMODB_ENDPOINT" value="http://dynamodb:8000"/>
+        <!-- <env name="DYNAMODB_CACHE_TABLE" value="cache"/> -->
         <env name="REDIS_HOST" value="redis"/>
         <env name="REDIS_PORT" value="6379"/>
         <env name="MEMCACHED_HOST" value="memcached"/>
