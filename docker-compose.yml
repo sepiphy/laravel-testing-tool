@@ -20,9 +20,9 @@ services:
       - lttnet
 
   mysql:
-    image: ltt-mysql5.7:latest
+    image: ltt-mysql${MYSQL_VERSION}:latest
     build:
-      context: ./docker/mysql5.7
+      context: ./docker/mysql/${MYSQL_VERSION}
     networks:
       - lttnet
     environment:
