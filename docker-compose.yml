@@ -6,9 +6,9 @@ networks:
 
 services:
   memcached:
-    image: ltt-memcached1.5:latest
+    image: ltt-memcached${MEMCACHED_VERSION}:latest
     build:
-      context: ./docker/memcached1.5
+      context: ./docker/memcached/${MEMCACHED_VERSION}
     networks:
       - lttnet
 
@@ -37,9 +37,10 @@ services:
       args:
         - CODE_GID=${CODE_GID}
         - CODE_UID=${CODE_UID}
-    volumes:
-      - ${SOURCE_DIR}:/app
     command: php -S localhost:8080
+    volumes:
+      - $PWD/storage/composer:/home/php/.composer
+      - ${REPOSITORY}:/app/repository
     networks:
       - lttnet
     environment:

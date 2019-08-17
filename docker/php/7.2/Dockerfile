@@ -27,9 +27,7 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
-ADD php.ini /usr/local/etc/php/php.ini
-
-WORKDIR /app
+RUN echo "memory_limit = -1" >> /usr/local/etc/php/php.ini
 
 ARG CODE_GID=1000
 ARG CODE_UID=1000
@@ -39,4 +37,15 @@ RUN set -xe; \
     useradd -u ${CODE_UID} -g php -m php && \
     usermod -p "*" php -s /bin/bash
 
+WORKDIR /app
+
+RUN chown -R php:php /app
+
 USER php:php
+
+RUN composer global config data-dir /home/php/.composer
+
+RUN echo "#!/usr/bin/env bash" >> /app/runtest \
+    && echo "cd /app/repository && composer install && ./vendor/bin/phpunit" >> /app/runtest
+
+RUN chmod +x /app/runtest
