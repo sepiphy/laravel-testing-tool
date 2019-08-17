@@ -1,4 +1,4 @@
-FROM php:7.2
+FROM php:7.3
 
 RUN apt-get update
 
@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libjpeg62-turbo-dev \
     libpng-dev \
     libjpeg-dev \
+    libzip-dev \
     zlib1g-dev \
     && docker-php-ext-configure pdo_odbc --with-pdo-odbc=unixODBC,/usr \
     && docker-php-ext-configure gd --with-jpeg-dir=/usr/include/ \

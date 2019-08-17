@@ -1,37 +1,37 @@
 version: "3.3"
 
 networks:
-  lttnet:
+  phptestnet:
     driver: bridge
 
 services:
   memcached:
-    image: ltt-memcached${MEMCACHED_VERSION}:latest
+    image: phptest-memcached${MEMCACHED_VERSION}:latest
     build:
       context: ./docker/memcached/${MEMCACHED_VERSION}
     networks:
-      - lttnet
+      - phptestnet
 
   redis:
-    image: ltt-redis${REDIS_VERSION}:latest
+    image: phptest-redis${REDIS_VERSION}:latest
     build:
       context: ./docker/redis/${REDIS_VERSION}
     networks:
-      - lttnet
+      - phptestnet
 
   mysql:
-    image: ltt-mysql${MYSQL_VERSION}:latest
+    image: phptest-mysql${MYSQL_VERSION}:latest
     build:
       context: ./docker/mysql/${MYSQL_VERSION}
     networks:
-      - lttnet
+      - phptestnet
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: laravel
     command: --default-authentication-plugin=mysql_native_password
 
   php:
-    image: ltt-php${PHP_VERSION}:latest
+    image: phptest-php${PHP_VERSION}:latest
     build:
       context: ./docker/php/${PHP_VERSION}
       args:
@@ -42,7 +42,7 @@ services:
       - $PWD/storage/composer:/home/php/.composer
       - ${REPOSITORY}:/app/repository
     networks:
-      - lttnet
+      - phptestnet
     environment:
       - DB_CONNECTION=mysql
       - DB_DATABASE=laravel
